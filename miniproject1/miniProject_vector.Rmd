@@ -39,6 +39,20 @@ load('miniProject_vector.rda')
 - Create a new vector named `us_profile` that consists of the 2000 United States (note that R is case sensitive) values for United States on life expectancy (lifeExpect_2000), population (population_2000), and GDP per capita (gdpCap_2000). Once created name the elements of `us_profile` by the respective variable from which they were subsetted (i.e., 'lifeExpect', 'population', and 'gdpCap').
 
 ```{r}
+pop2000 <- c(population_2000)
+names(pop2000) <- paste("population:", names(pop2000))
+
+life2000 <- lifeExpect_2000
+names(life2000) <- paste("life expectancy:", names(life2000))
+
+gdp2000 <- gdpCap_2000
+names(gdp2000) <- paste("gdp per capita:", names(gdp2000))
+
+
+us_profile<- c(pop2000,life2000,gdp2000)
+
+us_profile[1:10]
+us_profile[(length(us_profile)-5):length(us_profile)]
 
 ```
 
@@ -46,14 +60,30 @@ load('miniProject_vector.rda')
 - List the countries that had a GDP per capita greater than the 90th percentile in both 1980 and 2000.
 
 ```{r}
+newgdp80 <- gdpCap_1980[is.na(gdpCap_1980) == F]
 
+names(newgdp80[newgdp80 > quantile(newgdp80, p = .9, na.rm = T)])
+
+newgdp20 <- gdpCap_2000[is.na(gdpCap_2000) == F]
+
+print(" ")
+
+names(newgdp20[newgdp20 > quantile(newgdp20, p = .9, na.rm = T)])
 ```
 
 
 - List the countries that had an estimated life expectancy less than or equal to the 10th percentile in 1960, 1980, and 2000. 
 
 ```{r}
+newgdp80 <- gdpCap_1980[is.na(gdpCap_1980) == F]
 
+names(newgdp80[newgdp80 > quantile(newgdp80, p = .1, na.rm = T)])
+
+newgdp20 <- gdpCap_2000[is.na(gdpCap_2000) == F]
+
+print(" ")
+
+names(newgdp20[newgdp20 > quantile(newgdp20, p = .9, na.rm = T)])
 ```
 
 - List the countries that had a GDP per capita greater than the 90th percentile in 1960 **but not** 2000. The `setdiff` function will be useful here. Unlike `intersect` note that the order in which you input vectors into `setdiff` matters.
